@@ -35,6 +35,7 @@ use App\Http\Controllers\OfferController;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\RedeemController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\DocterController;
 
 
 
@@ -112,6 +113,15 @@ Route::controller(BrandController::class)->group(function () {
     Route::get('brand/edit/{id}', 'edit');
     Route::post('brand/store', 'store');
     Route::get('brand/delete/{id}', 'destroy');
+});
+
+
+Route::controller(DocterController::class)->group(function () {    
+    Route::get('docters','index');
+    Route::get('getDoctersData', 'getDoctersData');
+    Route::get('docter/edit/{id}', 'edit');
+    Route::post('docter/store', 'store');
+    Route::get('docter/delete/{id}', 'destroy');
 });
 
 
