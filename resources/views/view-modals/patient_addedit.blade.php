@@ -20,7 +20,7 @@
 
                     {{csrf_field()}}
 
-                    {!! Form::hidden('docter_id', '', ['id'=>'docter_id']); !!}
+                    {!! Form::hidden('patient_id', '', ['id'=>'patient_id']); !!}
 
                     <div class="row form-group">
                         <div class="col-sm-12">
@@ -31,14 +31,14 @@
 
                     <div class="row form-group">
                         <div class="col-sm-12">
-                            {!! Form::select('Speciality', $speciality, '', ['class'=>'standardSelect form-control', 'title'=>'Select Spaciality', 'data-live-search'=>'true', 'id'=>'status' , 'data-style'=>'btn-sp', 'data-dropup-auto'=>'false', 'data-size'=>'5']) !!}
-                            <span class="text-danger" id="name-error"></span>
+                            {!! Form::select('docter', $docters, '', ['class'=>'standardSelect form-control', 'title'=>'Select Docter', 'data-live-search'=>'true', 'id'=>'status' , 'data-style'=>'btn-sp', 'data-dropup-auto'=>'false', 'data-size'=>'5']) !!}
+                            <span class="text-danger" id="status-error"></span>
                         </div>
                     </div>
 
                     <div class="row form-group">
                         <div class="col-sm-12">
-                            {!! Form::date('DOB', '', ['class'=>"form-control", 'id'=>"title", 'placeholder'=>"Date of Birth", 'required']); !!}
+                            {!! Form::text('phone', '', ['class'=>"form-control", 'id'=>"title", 'placeholder'=>"Enter Phone number", 'required']); !!}
                             <span class="text-danger" id="name-error"></span>
                         </div>
                     </div>
@@ -52,14 +52,14 @@
 
                     <div class="row form-group">
                         <div class="col-sm-12">
-                            {!! Form::text('phone', '', ['class'=>"form-control", 'id'=>"title", 'placeholder'=>"Enter Phone Number", 'required']); !!}
+                            {!! Form::text('address', '', ['class'=>"form-control", 'id'=>"title", 'placeholder'=>"Enter Address", 'required']); !!}
                             <span class="text-danger" id="name-error"></span>
                         </div>
                     </div>
 
                     <div class="row form-group">
                         <div class="col-sm-12">
-                            {!! Form::text('experience', '', ['class'=>"form-control", 'id'=>"title", 'placeholder'=>"Enter Experience", 'required']); !!}
+                            {!! Form::date('DOB', '', ['class'=>"form-control", 'id'=>"title", 'placeholder'=>"Date of Birth", 'required']); !!}
                             <span class="text-danger" id="name-error"></span>
                         </div>
                     </div>

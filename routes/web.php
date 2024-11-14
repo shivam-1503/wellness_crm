@@ -36,6 +36,7 @@ use App\Http\Controllers\GiftController;
 use App\Http\Controllers\RedeemController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\DocterController;
+use App\Http\Controllers\PatientController;
 
 
 
@@ -122,6 +123,15 @@ Route::controller(DocterController::class)->group(function () {
     Route::get('docter/edit/{id}', 'edit');
     Route::post('docter/store', 'store');
     Route::get('docter/delete/{id}', 'destroy');
+});
+
+
+Route::controller(PatientController::class)->group(function () {    
+    Route::get('patients','index');
+    Route::get('getPatientsData', 'getPatientsData');
+    Route::get('patient/edit/{id}', 'edit');
+    Route::post('patient/store', 'store');
+    Route::get('patient/delete/{id}', 'destroy');
 });
 
 

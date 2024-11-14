@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Patient;
 use App\Models\Docter;
-use App\Models\Speciality;
 use DataTables;
 use Auth;
 
 
-class DocterController extends Controller
+class PatientController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -29,15 +29,15 @@ class DocterController extends Controller
     public function index()
     {
         
-        $speciality = Speciality::where('status', 1)->pluck('title', 'id')->toArray();
+        $docters = Docter::where('status', 1)->pluck('name', 'id')->toArray();
 
-        return view('pages.docter.docters', compact('speciality'));
+        return view('pages.patient.patients', compact('docters'));
     }
 
 
-    public function getDoctersData()
+    public function getPatientsData()
     {
-        $data = Docter::latest()->get(); 
+        $data = Patient::latest()->get(); 
         
         return Datatables::of($data)
                 ->addIndexColumn()
@@ -70,25 +70,25 @@ class DocterController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, ['name'=>'required', 'status'=>'required']); 
+        $this->validate($request, ['name'=>'required', 'phone'=>'required', 'status'=>'required']); 
         
-        Docter::updateOrCreate(
-                                    ['id' => $request->docter_id],
+        Patient::updateOrCreate(
+                                    ['id' => $request->patient_id],
                                     [
                                         'name' => ucwords($request->name), 
-                                        'speciality_id'=>$request->speciality_id,
-                                        'DOB' => ucwords($request->DOB),
-                                        'email' => ucwords($request->email),
-                                        'phone' => ucwords($request->phone), 
-                                        'experience' => ucwords($request->experience), 
+                                        'phone' => ucwords($request->phone),
+                                        'docter_id'=>$request->docter_id,
+                                        'address' => ucwords($request->address), 
+                                        'email' => ucwords($request->email), 
+                                        'DOB' => ucwords($request->DOB), 
                                         'status'=>$request->status,
                                     ]
                                 );        
-        if($request->docter_id){
-            $msg = "Docter Updated Successfully.";
+        if($request->patient_id){
+            $msg = "Patient Updated Successfully.";
         }
         else{
-            $msg = "Docter Created Successfully.";
+            $msg = "Patient Created Successfully.";
         }
         
         return response()->json(['msg'=>$msg]);
@@ -104,15 +104,15 @@ class DocterController extends Controller
      */
     public function edit($id)
     {
-        $docs = Docter::find($id);
-        return response()->json($docs);
+        $patient = Patient::find($id);
+        return response()->json($patient);
     }
 
 
     public function destroy($id)
     {
-        $del = Docter::find($id)->delete();
-        return response()->json(['success'=>'Docter deleted successfully.']);
+        $del = Patient::find($id)->delete();
+        return response()->json(['success'=>'Patient deleted successfully.']);
     }
 
 }

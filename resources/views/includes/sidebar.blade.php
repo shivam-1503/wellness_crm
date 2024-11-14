@@ -42,12 +42,11 @@
         
 
         <li class="slide">
-            <a class="side-menu__item" data-bs-toggle="slide" href="#">
+            <a class="side-menu__item" data-bs-toggle="slide" href="{{ url('/docters') }}">
                 <i class="side-menu__icon fa fa-user-tie"></i><span class="side-menu__label">Docters Details</span><i class="angle fa fa-angle-right"></i>
             </a>
 
             <ul class="slide-menu">
-                <li><a href="{{ url('/docters') }}" class="slide-item">Docters</a></li>
                 <li><a href="{{ url('/patients') }}" class="slide-item">Patients</a></li>
                 <li><a href="{{ url('/specialities') }}" class="slide-item">Specialities</a></li>
                 <li><a href="{{ url('/degrees') }}" class="slide-item">Degrees</a></li>
@@ -63,8 +62,8 @@
             <ul class="slide-menu">
                 <li><a href="{{ url('/docters') }}" class="slide-item">Enquiry</a></li>
                 <li><a href="{{ url('/patients') }}" class="slide-item">Register</a></li>
-                <li><a href="{{ url('/specialities') }}" class="slide-item">Treatment</a></li>
-                <li><a href="{{ url('/degrees') }}" class="slide-item">Diagnostic</a></li>
+                <li><a href="{{ url('/specialities') }}" class="slide-item">Interested</a></li>
+                <li><a href="{{ url('/degrees') }}" class="slide-item">Not Interested</a></li>
                 <li><a href="{{ url('/diesease') }}" class="slide-item">Follow Up</a></li>
             </ul>
         </li>

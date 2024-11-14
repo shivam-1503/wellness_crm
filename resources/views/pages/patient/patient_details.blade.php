@@ -7,25 +7,17 @@
 	<!-- PAGE-HEADER -->
 <div class="page-header">
     <div>
-        <h1>Docters <small>List & Management</small></h1>
+        <h1>Patients <small>List & Management</small></h1>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="#">Home</a></li>
             <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
         </ol>
     </div>
 
-    <div class="float-end">
-		<a class="btn btn-primary float-right" href="javascript:void(0)" id="createNewProduct"> Create New Docter</a>
-    </div>
-
 </div>
 <!-- PAGE-HEADER END -->
 
-
-
-
 	<div class="content mt-3">
-
         <!-- Default box -->
         <div class="card">
 
@@ -35,7 +27,8 @@
                         <tr>
                             <th>Sr.</th>
                             <th>Name</th>
-                            <th>Speciality</th>
+                            <th>Date of Birth</th>
+                            <th>Phone</th>
                             <th>Status</th>
                             <th>Last Update</th>
                             <th width="180px">Action</th>
@@ -50,8 +43,6 @@
         </div>
         <!-- /.card -->
     </div>
-
-	@include('view-modals/docter_addedit')
 
 @stop
 
@@ -78,11 +69,12 @@
 		var table = $('.data-table').DataTable({
 		    processing: true,
 		    serverSide: true,
-		    ajax: "{{ url('getDoctersData') }}",
+		    ajax: "{{ url('getPatientsData') }}",
 		    columns: [
 		        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-		        {data: 'name', name: 'name'},
-		        {data: 'speciality_id', name: 'speciality'},
+		        {data: 'title', name: 'title'},
+		        {data: 'DOB', name: 'Date of Birth'},
+		        {data: 'phone', name: 'phone'},
 		        {data: 'status', name: 'status', orderable: false, searchable: false},
 		        {data: 'updated_at', name: 'status', orderable: false, searchable: false},
 		        {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -94,37 +86,9 @@
 		    }
 		});
 
-		$('#createNewProduct').click(function () {
-		    reset_modal();
-		    $('#saveBtn').val("Create");
-		    $('#status').val('').trigger("chosen:updated");
-		    $('#dataForm').trigger("reset");
-		    $('#modelHeading').html("Create New Docter");
-		    $('#ajaxModel').modal('show');
-		});
-
-
-		$('body').on('click', '.editProduct', function () {
-		  var product_id = $(this).data('id');
-		  reset_modal();
-		  $.get("{{ url('docter/edit') }}" +'/' + product_id, function (data) {
-		      $('#modelHeading').html("Edit Docter");
-		      $('#saveBtn').val("Save Changes");
-		      $('#ajaxModel').modal('show');
-		      $('#brand_id').val(data.id);
-		      $('#title').val(data.title);
-		      $('#status').val(data.status);
-			  $('.standardSelect').selectpicker('refresh');
-		  })
-		});
-
-		$('#saveBtn').click(function (e) {
-		    e.preventDefault();
-		    $(this).html('Sending..');
-
-		    $.ajax({
+		$.ajax({
 		        data: $('#dataForm').serialize(),
-		        url: "{{ url('docter/store') }}",
+		        url: "{{ url('patient/store') }}",
 		        type: "POST",
 		        dataType: 'json',
 
@@ -157,7 +121,7 @@
 
 		    swal({
 		    	title: "Are you sure?",
-				text: "Once deleted, you will not be able to recover this Docters Data!",
+				text: "Once deleted, you will not be able to recover this Patients Data!",
 				icon: "warning",
 				buttons: true,
 				dangerMode: true,
@@ -167,10 +131,10 @@
 
 					$.ajax({
 				        type: "GET",
-				        url: "{{ url('docter/delete') }}"+'/'+product_id,
+				        url: "{{ url('patient/delete') }}"+'/'+product_id,
 				        success: function (data) {
 				            table.draw();
-				            swal("Great! Docter has been deleted!", {
+				            swal("Great! Patient details has been deleted!", {
 						      icon: "success",
 						    });
 				        },
@@ -181,7 +145,7 @@
 				}
 				else
 				{
-					swal("Your docter delete request Cancelled!")
+					swal("Your patient delete request Cancelled!")
 				}
 
 			})
