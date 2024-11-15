@@ -37,6 +37,9 @@ use App\Http\Controllers\RedeemController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\DocterController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\DiseaseController;
+use App\Http\Controllers\DegreeController;
+use App\Http\Controllers\SpecialityController;
 
 
 
@@ -123,6 +126,24 @@ Route::controller(DocterController::class)->group(function () {
     Route::get('docter/edit/{id}', 'edit');
     Route::post('docter/store', 'store');
     Route::get('docter/delete/{id}', 'destroy');
+});
+
+
+Route::controller(DegreeController::class)->group(function () {    
+    Route::get('degrees','index');
+    Route::get('getDegreesData', 'getDegreesData');
+});
+
+
+Route::controller(DiseaseController::class)->group(function () {    
+    Route::get('diseases','index');
+    Route::get('getDiseasesData', 'getDiseasesData');
+});
+
+
+Route::controller(SpecialityController::class)->group(function () {    
+    Route::get('specialities','index');
+    Route::get('getSpecialitiesData', 'getSpecialitiesData');
 });
 
 
